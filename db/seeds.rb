@@ -9,4 +9,7 @@ ActiveRecord::Base.transaction do
   5.times do
     User.create(email: Faker::Internet.email)
   end
+  5.times do
+    # User.all.sample.customers.create
+  end
 end

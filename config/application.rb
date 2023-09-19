@@ -35,5 +35,6 @@ module Skyum
     config.generators.system_tests = nil
     config.assets.paths << Rails.root.join('app')
     config.paths.add 'app/packages', glob: '*/{*,*/concerns}', eager_load:true
+    config.generators.orm :active_record, primary_key_type: :uuid
   end
 end

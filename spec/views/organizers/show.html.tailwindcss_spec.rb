@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe "users/show", type: :view do
+RSpec.describe "organizers/show", type: :view do
   before(:each) do
-    assign(:user, User.create!(
+    assign(:organizer, Organizer.create!(
       email: "Email"
     ))
   end

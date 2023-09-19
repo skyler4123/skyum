@@ -12,10 +12,10 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/customers", type: :request do
+RSpec.describe "/organizers", type: :request do
   
   # This should return the minimal set of attributes required to create a valid
-  # Customer. As you add validations to Customer, be sure to
+  # Organizer. As you add validations to Organizer, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
@@ -27,59 +27,59 @@ RSpec.describe "/customers", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
-      Customer.create! valid_attributes
-      get customers_url
+      Organizer.create! valid_attributes
+      get organizers_url
       expect(response).to be_successful
     end
   end
 
   describe "GET /show" do
     it "renders a successful response" do
-      customer = Customer.create! valid_attributes
-      get customer_url(customer)
+      organizer = Organizer.create! valid_attributes
+      get organizer_url(organizer)
       expect(response).to be_successful
     end
   end
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_customer_url
+      get new_organizer_url
       expect(response).to be_successful
     end
   end
 
   describe "GET /edit" do
     it "renders a successful response" do
-      customer = Customer.create! valid_attributes
-      get edit_customer_url(customer)
+      organizer = Organizer.create! valid_attributes
+      get edit_organizer_url(organizer)
       expect(response).to be_successful
     end
   end
 
   describe "POST /create" do
     context "with valid parameters" do
-      it "creates a new Customer" do
+      it "creates a new Organizer" do
         expect {
-          post customers_url, params: { customer: valid_attributes }
-        }.to change(Customer, :count).by(1)
+          post organizers_url, params: { organizer: valid_attributes }
+        }.to change(Organizer, :count).by(1)
       end
 
-      it "redirects to the created customer" do
-        post customers_url, params: { customer: valid_attributes }
-        expect(response).to redirect_to(customer_url(Customer.last))
+      it "redirects to the created organizer" do
+        post organizers_url, params: { organizer: valid_attributes }
+        expect(response).to redirect_to(organizer_url(Organizer.last))
       end
     end
 
     context "with invalid parameters" do
-      it "does not create a new Customer" do
+      it "does not create a new Organizer" do
         expect {
-          post customers_url, params: { customer: invalid_attributes }
-        }.to change(Customer, :count).by(0)
+          post organizers_url, params: { organizer: invalid_attributes }
+        }.to change(Organizer, :count).by(0)
       end
 
     
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post customers_url, params: { customer: invalid_attributes }
+        post organizers_url, params: { organizer: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     
@@ -92,26 +92,26 @@ RSpec.describe "/customers", type: :request do
         skip("Add a hash of attributes valid for your model")
       }
 
-      it "updates the requested customer" do
-        customer = Customer.create! valid_attributes
-        patch customer_url(customer), params: { customer: new_attributes }
-        customer.reload
+      it "updates the requested organizer" do
+        organizer = Organizer.create! valid_attributes
+        patch organizer_url(organizer), params: { organizer: new_attributes }
+        organizer.reload
         skip("Add assertions for updated state")
       end
 
-      it "redirects to the customer" do
-        customer = Customer.create! valid_attributes
-        patch customer_url(customer), params: { customer: new_attributes }
-        customer.reload
-        expect(response).to redirect_to(customer_url(customer))
+      it "redirects to the organizer" do
+        organizer = Organizer.create! valid_attributes
+        patch organizer_url(organizer), params: { organizer: new_attributes }
+        organizer.reload
+        expect(response).to redirect_to(organizer_url(organizer))
       end
     end
 
     context "with invalid parameters" do
     
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        customer = Customer.create! valid_attributes
-        patch customer_url(customer), params: { customer: invalid_attributes }
+        organizer = Organizer.create! valid_attributes
+        patch organizer_url(organizer), params: { organizer: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     
@@ -119,17 +119,17 @@ RSpec.describe "/customers", type: :request do
   end
 
   describe "DELETE /destroy" do
-    it "destroys the requested customer" do
-      customer = Customer.create! valid_attributes
+    it "destroys the requested organizer" do
+      organizer = Organizer.create! valid_attributes
       expect {
-        delete customer_url(customer)
-      }.to change(Customer, :count).by(-1)
+        delete organizer_url(organizer)
+      }.to change(Organizer, :count).by(-1)
     end
 
-    it "redirects to the customers list" do
-      customer = Customer.create! valid_attributes
-      delete customer_url(customer)
-      expect(response).to redirect_to(customers_url)
+    it "redirects to the organizers list" do
+      organizer = Organizer.create! valid_attributes
+      delete organizer_url(organizer)
+      expect(response).to redirect_to(organizers_url)
     end
   end
 end

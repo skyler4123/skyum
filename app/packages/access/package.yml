@@ -11,3 +11,4 @@ public_path: public/
 # Note that packages in this list require their own `package.yml` file
 dependencies:
 - '.'
+- 'app/packages/customers'
