@@ -7,9 +7,16 @@
 #   Character.create(name: "Luke", movie: movies.first)
 ActiveRecord::Base.transaction do
   5.times do
-    User.create(email: Faker::Internet.email)
+    User.create(
+      email: Faker::Internet.email,
+      password: 'password',
+      password_confirmation: 'password'
+    )
   end
   5.times do
-    # User.all.sample.customers.create
+    Customer.create(user: User.all.sample)
+  end
+  5.times do
+    Organizer.create(user: User.all.sample)
   end
 end
