@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_082703) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_20_092148) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -38,6 +38,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_082703) do
     t.index ["user_id"], name: "index_customers_on_user_id"
   end
 
+  create_table "shop_owners", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_shop_owners_on_user_id"
+  end
+
+  create_table "shops", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.uuid "shop_owner_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shop_owner_id"], name: "index_shops_on_shop_owner_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -46,4 +61,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_082703) do
   end
 
   add_foreign_key "customers", "users"
+  add_foreign_key "shop_owners", "users"
+  add_foreign_key "shops", "shop_owners"
 end
