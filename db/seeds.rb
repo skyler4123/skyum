@@ -18,11 +18,11 @@ ActiveRecord::Base.transaction do
       user: User.all.sample
     )
   end
-  # ["Phone", "Laptop", "Book", "Speaker", "Headphone", "Camera"].each do |category|
-  #   Category.create(
-  #     name: category,
-  #   )
-  # end
+  ["phone", "laptop", "book", "speaker", "headphone", "camera"].each do |category|
+    Category.create(
+      name: category,
+    )
+  end
   # 5.times do
   #   Branch.create(
   #     name: Faker::Device.manufacturer,
