@@ -13,10 +13,5 @@ ActiveRecord::Base.transaction do
       password_confirmation: 'password'
     )
   end
-  5.times do
-    Customer.create(user: User.all.sample)
-  end
-  5.times do
-    Organizer.create(user: User.all.sample)
-  end
+
 end
