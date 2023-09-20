@@ -44,17 +44,19 @@ ActiveRecord::Base.transaction do
   10.times do
     Order.create(
       customer: Customer.all.sample,
-      status: [0, 1].sample
+      shop: Shop.all.sample,
+      status: [0, 1].sample,
     )
   end
-  # 25.times do
-  #   Product.create(
-  #     name: Faker::Device.model_name,
-  #     unit_price: rand(20..200),
-  #     branch: Branch.all.sample,
-  #     category: Category.all.sample,
-  #     status: [0, 1].sample,
-  #   )
-  # end
+  25.times do
+    Product.create(
+      name: Faker::Device.model_name,
+      unit_price: rand(20..200),
+      branch: Branch.all.sample,
+      category: Category.all.sample,
+      status: [0, 1].sample,
+      shop: Shop.all.sample,
+    )
+  end
 
 end
