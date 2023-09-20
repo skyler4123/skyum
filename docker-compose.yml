@@ -16,5 +16,7 @@ services:
       - .:/rails
     ports:
       - "3000:3000"
+    stdin_open: true
+    tty: true
     depends_on:
       - postgres

@@ -41,7 +41,12 @@ ActiveRecord::Base.transaction do
       shop_owner: shop_owner,
     )
   end
-
+  10.times do
+    Order.create(
+      customer: Customer.all.sample,
+      status: [0, 1].sample
+    )
+  end
   # 25.times do
   #   Product.create(
   #     name: Faker::Device.model_name,

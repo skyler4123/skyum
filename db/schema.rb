@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_092148) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_20_093517) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -38,6 +38,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_092148) do
     t.index ["user_id"], name: "index_customers_on_user_id"
   end
 
+  create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "customer_id", null: false
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+  end
+
   create_table "shop_owners", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.datetime "created_at", null: false
@@ -61,6 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_092148) do
   end
 
   add_foreign_key "customers", "users"
+  add_foreign_key "orders", "customers"
   add_foreign_key "shop_owners", "users"
   add_foreign_key "shops", "shop_owners"
 end
