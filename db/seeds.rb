@@ -23,12 +23,15 @@ ActiveRecord::Base.transaction do
       name: category,
     )
   end
-  # 5.times do
-  #   Branch.create(
-  #     name: Faker::Device.manufacturer,
-  #     status: 1,
-  #   )
-  # end
+  5.times do
+    Branch.create(
+      name: Faker::Device.manufacturer,
+      established: rand(1900..1950),
+      nationality: ["america", "japan", "canada", "france", "china"].sample,
+      is_global_company: [true, false].sample,
+      status: [0, 1].sample,
+    )
+  end
   # 25.times do
   #   Product.create(
   #     name: Faker::Device.model_name,
