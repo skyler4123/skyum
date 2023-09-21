@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :payment_partners
+  resources :order_products
   resources :products
   resources :orders
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

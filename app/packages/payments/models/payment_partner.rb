@@ -1,0 +1,2 @@
+class PaymentPartner < ApplicationRecord
+end

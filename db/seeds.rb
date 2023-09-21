@@ -48,7 +48,7 @@ ActiveRecord::Base.transaction do
       status: [0, 1].sample,
     )
   end
-  25.times do
+  10.times do
     Product.create(
       name: Faker::Device.model_name,
       unit_price: rand(20..200),
@@ -57,6 +57,23 @@ ActiveRecord::Base.transaction do
       status: [0, 1].sample,
       shop: Shop.all.sample,
     )
+  end
+  10.times do
+    product = Product.all.sample
+    OrderProduct.create(
+      order: Order.all.sample,
+      product: product,
+      status: [0, 1].sample,
+      unit_price: product.unit_price,
+      quantity: rand(1..4),
+    )
+  end
+  5.times do
+    ['paypal', 'stripe', 'mastercard', 'visa'].each do |payment_partner|
+      PaymentPartner.create(
+        name: payment_partner
+      )
+    end
   end
 
 end
