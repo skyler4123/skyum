@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_21_035628) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_21_040625) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -78,6 +78,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_21_035628) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "payments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.decimal "total_amount"
+    t.uuid "gift_card_id"
+    t.string "remain_amount"
+    t.uuid "order_id", null: false
+    t.integer "status"
+    t.boolean "is_cod_payment"
+    t.uuid "payment_partner_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gift_card_id"], name: "index_payments_on_gift_card_id"
+    t.index ["order_id"], name: "index_payments_on_order_id"
+    t.index ["payment_partner_id"], name: "index_payments_on_payment_partner_id"
+  end
+
   create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.decimal "unit_price"
@@ -120,6 +135,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_21_035628) do
   add_foreign_key "order_products", "products"
   add_foreign_key "orders", "customers"
   add_foreign_key "orders", "shops"
+  add_foreign_key "payments", "gift_cards"
+  add_foreign_key "payments", "orders"
+  add_foreign_key "payments", "payment_partners"
   add_foreign_key "products", "branches"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "shops"
