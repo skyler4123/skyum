@@ -68,12 +68,20 @@ ActiveRecord::Base.transaction do
       quantity: rand(1..4),
     )
   end
-  5.times do
-    ['paypal', 'stripe', 'mastercard', 'visa'].each do |payment_partner|
-      PaymentPartner.create(
-        name: payment_partner
-      )
-    end
+  ['paypal', 'stripe', 'mastercard', 'visa'].each do |payment_partner|
+    PaymentPartner.create(
+      name: payment_partner,
+    )
   end
+  10.times do
+    GiftCard.create(
+      qr_code: Faker::Barcode.isbn,
+      shop: Shop.all.sample,
+      status: [0, 1].sample,
+      amount: [10, 20, 50, 100].sample,
+      expire_at: 30.days.from_now,
+    )
+  end
+
 
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :gift_cards
   resources :payment_partners
   resources :order_products
   resources :products

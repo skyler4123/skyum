@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_214304) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_21_035628) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -38,6 +38,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_214304) do
     t.index ["user_id"], name: "index_customers_on_user_id"
   end
 
+  create_table "gift_cards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "qr_code"
+    t.uuid "shop_id", null: false
+    t.integer "status"
+    t.integer "amount"
+    t.datetime "used_at"
+    t.datetime "expire_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shop_id"], name: "index_gift_cards_on_shop_id"
+  end
+
   create_table "order_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "order_id", null: false
     t.uuid "product_id", null: false
@@ -58,6 +70,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_214304) do
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["shop_id"], name: "index_orders_on_shop_id"
+  end
+
+  create_table "payment_partners", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -97,6 +115,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_214304) do
   end
 
   add_foreign_key "customers", "users"
+  add_foreign_key "gift_cards", "shops"
   add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
   add_foreign_key "orders", "customers"
