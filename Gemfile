@@ -73,6 +73,8 @@ gem "view_component"
 gem "packwerk"
 gem "graphwerk"
 gem "jwt"
+gem "webrick"
+gem "dalli"
 gem 'sorbet', :group => :development
 gem 'sorbet-runtime'
 gem 'tapioca', require: false, :group => :development
