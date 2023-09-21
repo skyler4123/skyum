@@ -88,11 +88,11 @@ ActiveRecord::Base.transaction do
     total_amount = order.order_products.select("(unit_price * quantity) AS amount").inject(0) {|sum, order| sum + order.amount}
     gift_card = GiftCard.all.sample
     is_cod_payment = [true, false].sample
-    Payment.create(
+    Payment.create!(
       total_amount: total_amount,
       gift_card: gift_card,
       remain_amount: (total_amount - gift_card.amount).abs,
-      order: Order.all.sample,
+      order: order,
       status: [0, 1].sample,
       is_cod_payment: is_cod_payment,
       payment_partner: is_cod_payment ? nil : PaymentPartner.all.sample
