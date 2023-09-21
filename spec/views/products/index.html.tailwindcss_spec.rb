@@ -7,16 +7,12 @@ RSpec.describe "products/index", type: :view do
         name: "Name",
         unit_price: "9.99",
         branch: nil,
-        shop: nil,
-        category: nil,
         status: 2
       ),
       Product.create!(
         name: "Name",
         unit_price: "9.99",
         branch: nil,
-        shop: nil,
-        category: nil,
         status: 2
       )
     ])
@@ -27,8 +23,6 @@ RSpec.describe "products/index", type: :view do
     cell_selector = Rails::VERSION::STRING >= '7' ? 'div>p' : 'tr>td'
     assert_select cell_selector, text: Regexp.new("Name".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("9.99".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new(nil.to_s), count: 2
-    assert_select cell_selector, text: Regexp.new(nil.to_s), count: 2
     assert_select cell_selector, text: Regexp.new(nil.to_s), count: 2
     assert_select cell_selector, text: Regexp.new(2.to_s), count: 2
   end

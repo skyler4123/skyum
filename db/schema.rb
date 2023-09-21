@@ -45,9 +45,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_21_040625) do
 
   create_table "branches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
-    t.integer "established"
     t.string "nationality"
-    t.boolean "is_global_company"
+    t.string "area"
+    t.integer "established"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
