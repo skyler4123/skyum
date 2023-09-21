@@ -27,18 +27,23 @@ ActiveRecord::Base.transaction do
       name: Faker::Device.model_name,
       unit_price: rand(20..200),
       branch: Branch.all.sample,
-      category: Category.all.sample,
       status: [0, 1].sample,
-      shop: Shop.all.sample,
     )
   end
   10.times do
-    GiftCard.create(
+    Card.create(
       qr_code: Faker::Barcode.isbn,
-      shop: Shop.all.sample,
+      branch: Branch.all.sample,
+      user: User.all.sample,
       status: [0, 1].sample,
       amount: [10, 20, 50, 100].sample,
       expire_at: 30.days.from_now,
+    )
+  end
+  Card.all.each do |card|
+    Payment.create(
+      card: card,
+      status: card.status
     )
   end
 

@@ -12,10 +12,10 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/gift_cards", type: :request do
+RSpec.describe "/payments", type: :request do
   
   # This should return the minimal set of attributes required to create a valid
-  # GiftCard. As you add validations to GiftCard, be sure to
+  # Payment. As you add validations to Payment, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
@@ -27,59 +27,59 @@ RSpec.describe "/gift_cards", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
-      GiftCard.create! valid_attributes
-      get gift_cards_url
+      Payment.create! valid_attributes
+      get payments_url
       expect(response).to be_successful
     end
   end
 
   describe "GET /show" do
     it "renders a successful response" do
-      gift_card = GiftCard.create! valid_attributes
-      get gift_card_url(gift_card)
+      payment = Payment.create! valid_attributes
+      get payment_url(payment)
       expect(response).to be_successful
     end
   end
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_gift_card_url
+      get new_payment_url
       expect(response).to be_successful
     end
   end
 
   describe "GET /edit" do
     it "renders a successful response" do
-      gift_card = GiftCard.create! valid_attributes
-      get edit_gift_card_url(gift_card)
+      payment = Payment.create! valid_attributes
+      get edit_payment_url(payment)
       expect(response).to be_successful
     end
   end
 
   describe "POST /create" do
     context "with valid parameters" do
-      it "creates a new GiftCard" do
+      it "creates a new Payment" do
         expect {
-          post gift_cards_url, params: { gift_card: valid_attributes }
-        }.to change(GiftCard, :count).by(1)
+          post payments_url, params: { payment: valid_attributes }
+        }.to change(Payment, :count).by(1)
       end
 
-      it "redirects to the created gift_card" do
-        post gift_cards_url, params: { gift_card: valid_attributes }
-        expect(response).to redirect_to(gift_card_url(GiftCard.last))
+      it "redirects to the created payment" do
+        post payments_url, params: { payment: valid_attributes }
+        expect(response).to redirect_to(payment_url(Payment.last))
       end
     end
 
     context "with invalid parameters" do
-      it "does not create a new GiftCard" do
+      it "does not create a new Payment" do
         expect {
-          post gift_cards_url, params: { gift_card: invalid_attributes }
-        }.to change(GiftCard, :count).by(0)
+          post payments_url, params: { payment: invalid_attributes }
+        }.to change(Payment, :count).by(0)
       end
 
     
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post gift_cards_url, params: { gift_card: invalid_attributes }
+        post payments_url, params: { payment: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     
@@ -92,26 +92,26 @@ RSpec.describe "/gift_cards", type: :request do
         skip("Add a hash of attributes valid for your model")
       }
 
-      it "updates the requested gift_card" do
-        gift_card = GiftCard.create! valid_attributes
-        patch gift_card_url(gift_card), params: { gift_card: new_attributes }
-        gift_card.reload
+      it "updates the requested payment" do
+        payment = Payment.create! valid_attributes
+        patch payment_url(payment), params: { payment: new_attributes }
+        payment.reload
         skip("Add assertions for updated state")
       end
 
-      it "redirects to the gift_card" do
-        gift_card = GiftCard.create! valid_attributes
-        patch gift_card_url(gift_card), params: { gift_card: new_attributes }
-        gift_card.reload
-        expect(response).to redirect_to(gift_card_url(gift_card))
+      it "redirects to the payment" do
+        payment = Payment.create! valid_attributes
+        patch payment_url(payment), params: { payment: new_attributes }
+        payment.reload
+        expect(response).to redirect_to(payment_url(payment))
       end
     end
 
     context "with invalid parameters" do
     
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        gift_card = GiftCard.create! valid_attributes
-        patch gift_card_url(gift_card), params: { gift_card: invalid_attributes }
+        payment = Payment.create! valid_attributes
+        patch payment_url(payment), params: { payment: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     
@@ -119,17 +119,17 @@ RSpec.describe "/gift_cards", type: :request do
   end
 
   describe "DELETE /destroy" do
-    it "destroys the requested gift_card" do
-      gift_card = GiftCard.create! valid_attributes
+    it "destroys the requested payment" do
+      payment = Payment.create! valid_attributes
       expect {
-        delete gift_card_url(gift_card)
-      }.to change(GiftCard, :count).by(-1)
+        delete payment_url(payment)
+      }.to change(Payment, :count).by(-1)
     end
 
-    it "redirects to the gift_cards list" do
-      gift_card = GiftCard.create! valid_attributes
-      delete gift_card_url(gift_card)
-      expect(response).to redirect_to(gift_cards_url)
+    it "redirects to the payments list" do
+      payment = Payment.create! valid_attributes
+      delete payment_url(payment)
+      expect(response).to redirect_to(payments_url)
     end
   end
 end
