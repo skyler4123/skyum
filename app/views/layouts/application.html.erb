@@ -12,10 +12,22 @@
   </head>
 
   <body>
-    <%= render(Header::StickyComponent.new) %>
+    <%= render(Header::StickyComponent.new(klass: "sticky top-0 shadow-xl flex flex-row items-center justify-between")) do %>
+      <div class="flex flex-row items-center">
+        <%= render(Button::FloatComponent.new) do |component| %>
+          <% component.with_float do %>
+            <%= render(Navbar::FloatComponent.new) %>
+          <% end %>
+        <% end %>
+        <%= render(Form::SearchComponent.new) %>
+      </div>
+      <div>2</div>
+      <div>3</div>
+    <% end %>
+    <%= render(DemoComponent.new) %>
     <main>
       <%= yield %>
     </main>
-    <footer></footer>
+    <%= render(Footer::DefaultComponent.new) %>
   </body>
 </html>

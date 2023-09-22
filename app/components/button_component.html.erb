@@ -1,5 +1,5 @@
 <div data-controller="button-component" class="<%= @klass %>">
-  <button type="button" class="<%= @button_class || "text-white bg-blue-700 active:bg-blue-800 font-medium rounded-md text-lg px-5 py-2.5 dark:bg-blue-600 dark:active:bg-blue-700" %>">
+  <button type="button" class="<%= @button_class %>">
     <%= header %>
     <%= content? ? content : @label %>
     <%= footer %>
